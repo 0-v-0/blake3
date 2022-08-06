@@ -1,0 +1,12 @@
+name "blake3"
+description "D bindings for libblake3"
+authors "0-v-0"
+license "MIT"
+sourcePaths "blake3"
+importPaths "."
+configuration "static" {
+    libs "libblake3"
+}
+configuration "dynamic" {
+    dependency "dynamic" version="~>0.9.7"
+}
