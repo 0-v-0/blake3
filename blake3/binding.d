@@ -2,7 +2,7 @@ module blake3.binding;
 
 extern (C) nothrow @nogc:
 
-enum BLAKE3_VERSION_STRING = "1.3.1";
+enum BLAKE3_VERSION_STRING = "1.3.3";
 enum BLAKE3_KEY_LEN = 32,
 	BLAKE3_OUT_LEN = 32,
 	BLAKE3_BLOCK_LEN = 64,
