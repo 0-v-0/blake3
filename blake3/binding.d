@@ -1,8 +1,10 @@
 module blake3.binding;
 
-extern (C) nothrow @nogc:
+extern (C) pure nothrow @nogc:
 
-enum BLAKE3_VERSION_STRING = "1.5.1";
+// Copied from BLAKE3/c/blake3.h
+
+enum BLAKE3_VERSION_STRING = "1.5.4";
 enum BLAKE3_KEY_LEN = 32,
 	BLAKE3_OUT_LEN = 32,
 	BLAKE3_BLOCK_LEN = 64,
