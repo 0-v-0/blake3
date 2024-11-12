@@ -8,5 +8,5 @@ configuration "static" {
     libs "libblake3"
 }
 configuration "dynamic" {
-    dependency "dynamic" version="~>0.9.7"
+    dependency "dynamic" version="~>1.0.0"
 }

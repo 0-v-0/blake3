@@ -31,7 +31,7 @@ struct blake3_hasher {
 	// requires a 4th entry, rather than merging everything down to 1, because we
 	// don't know whether more input is coming. This is different from how the
 	// reference implementation does things.
-	ubyte[1760] cv_stack;
+	ubyte[(BLAKE3_MAX_DEPTH + 1) * BLAKE3_OUT_LEN] cv_stack;
 }
 
 const(char)* blake3_version();
