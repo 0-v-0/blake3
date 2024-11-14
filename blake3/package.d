@@ -8,9 +8,9 @@ version (Have_dynamic) {
 
 	shared static this() {
 		version (Windows)
-			libblake3.loadBinding(["libblake3"]);
+			libblake3.loadBinding("libblake3");
 		else
-			libblake3.loadBinding(["libblake3.so"]);
+			libblake3.loadBinding("libblake3.so");
 	}
 } else
 	import blake3.binding;
