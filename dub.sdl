@@ -4,6 +4,7 @@ authors "0-v-0"
 license "MIT"
 sourcePaths "blake3"
 importPaths "."
+dflags "-preview=in"
 configuration "static" {
     libs "libblake3"
 }

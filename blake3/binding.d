@@ -4,7 +4,7 @@ extern (C) pure nothrow @nogc:
 
 // Copied from BLAKE3/c/blake3.h
 
-enum BLAKE3_VERSION_STRING = "1.5.4";
+enum BLAKE3_VERSION_STRING = "1.8.2";
 enum BLAKE3_KEY_LEN = 32,
 	BLAKE3_OUT_LEN = 32,
 	BLAKE3_BLOCK_LEN = 64,
@@ -34,7 +34,7 @@ struct blake3_hasher {
 	ubyte[(BLAKE3_MAX_DEPTH + 1) * BLAKE3_OUT_LEN] cv_stack;
 }
 
-const(char)* blake3_version();
+const(char)* blake3_version() @safe;
 void blake3_hasher_init(blake3_hasher* self);
 void blake3_hasher_init_keyed(
 	blake3_hasher* self,
@@ -48,6 +48,12 @@ void blake3_hasher_update(
 	blake3_hasher* self,
 	const(void)* input,
 	size_t input_len);
+version (BLAKE3_USE_TBB) {
+	void blake3_hasher_update_tbb(
+		blake3_hasher* self,
+		const(void)* input,
+		size_t input_len);
+}
 void blake3_hasher_finalize(
 	const(blake3_hasher)* self,
 	ubyte* out_,
@@ -57,3 +63,4 @@ void blake3_hasher_finalize_seek(
 	ulong seek,
 	ubyte* out_,
 	size_t out_len);
+void blake3_hasher_reset(blake3_hasher* self);

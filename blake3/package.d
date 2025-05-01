@@ -51,7 +51,7 @@ auto BLAKE3(const(void)* context, size_t contextLen) @trusted {
 }
 
 /// Update the hasher with data.
-void put(ref Hasher hasher, in void[] data) @trusted {
+void put(ref Hasher hasher, in void[] data) @trusted pure nothrow @nogc {
 	blake3_hasher_update(&hasher, data.ptr, data.length);
 }
 
@@ -71,6 +71,11 @@ if (L > 0 && L < 4096) {
 	return output;
 }
 
+/// Reset the hasher to its initial state.
+void reset(ref Hasher hasher) @trusted pure nothrow @nogc {
+	blake3_hasher_reset(&hasher);
+}
+
 /// Compute the BLAKE3 hash value of data.
 ubyte[L] blake3Of(size_t L = BLAKE3_OUT_LEN)(in void[] data)
 if (L > 0 && L < 4096) {
@@ -79,7 +84,14 @@ if (L > 0 && L < 4096) {
 	return hasher.finish!L();
 }
 
+///
 unittest {
 	assert(blake3Of([]) == emptyHash);
 	assert(blake3Of("Hello world!") == x"793c10bc0b28c378330d39edace7260af9da81d603b8ffede2706a21eda893f4");
+}
+
+ubyte[L] blake3Of(size_t L = 32)(in void[] data, in ubyte[32] key) {
+	auto hasher = BLAKE3(key);
+	hasher.put(data);
+	return hasher.finish!L();
 }
