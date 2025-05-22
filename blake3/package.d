@@ -71,6 +71,16 @@ if (L > 0 && L < 4096) {
 	return output;
 }
 
+/// ditto
+void finish(const ref Hasher hasher, ubyte[] output) @trusted {
+	blake3_hasher_finalize(&hasher, output.ptr, output.length);
+}
+
+/// ditto
+void finish(const ref Hasher hasher, ubyte[] output, ulong seek) @trusted {
+	blake3_hasher_finalize_seek(&hasher, seek, output.ptr, output.length);
+}
+
 /// Reset the hasher to its initial state.
 void reset(ref Hasher hasher) @trusted pure nothrow @nogc {
 	blake3_hasher_reset(&hasher);

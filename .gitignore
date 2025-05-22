@@ -19,9 +19,12 @@
 docs.json
 __dummy.html
 docs/
+.ldc2_cache
+trace.json
 
 # Code coverage
 *.lst
 dub.selections.json
 
 *.pdb
+.DS_Store
